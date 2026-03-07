@@ -21,3 +21,6 @@ def membership_status(end_date):
         return "Active"
     else:
         return "Expired"
+
+def calculate_bmi_value(weight, height):
+    return weight / (height ** 2)
