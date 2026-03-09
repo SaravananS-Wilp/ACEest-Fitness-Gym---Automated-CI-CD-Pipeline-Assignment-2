@@ -1,7 +1,7 @@
 from datetime import datetime
 
 def calculate_bmi(weight, height):
-    bmi = weight / (height ** 2)
+    bmi = calculate_bmi_value(weight, height)   
 
     if bmi < 18.5:
         return "Underweight"
