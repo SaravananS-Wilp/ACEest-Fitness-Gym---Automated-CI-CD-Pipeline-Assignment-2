@@ -2,32 +2,36 @@
 
 ## Project Overview
 
-This project demonstrates a DevOps-based automated CI/CD pipeline for a simple Fitness Gym application built using Flask.
-The objective of this project is to showcase how modern DevOps tools can automate the build, test, and deployment processes.
+This project demonstrates a DevOps-based automated CI/CD pipeline for a simple Fitness Gym web application built using Flask.
 
-The project integrates:
+The objective of this project is to showcase how modern DevOps tools automate the build, test, and deployment processes.
+
+The pipeline integrates:
 
 * GitHub for version control
-* Automated testing using Pytest
-* Docker containerization
-* CI pipeline using GitHub Actions
-* Build automation using Jenkins
+* Jenkins for build automation
+* Pytest for automated testing
+* Docker for containerization
 
-This pipeline ensures that every code change is automatically tested and validated before deployment.
+This ensures that every code change is automatically tested and validated before deployment.
 
-# Technologies Used
+---
 
-| Technology     | Purpose                  |
-| -------------- | ------------------------ |
-| Python         | Backend programming      |
-| Flask          | Web framework            |
-| Pytest         | Unit testing             |
-| Docker         | Containerization         |
-| GitHub         | Version control          |
-| GitHub Actions | Continuous Integration   |
-| Jenkins        | Automated build pipeline |
+## Technologies Used
 
-# Project Structure
+| Technology     | Purpose                    |
+| -------------- | -------------------------- |
+| Python         | Backend programming        |
+| Flask          | Web framework              |
+| Pytest         | Unit testing               |
+| Docker         | Containerization           |
+| Docker Compose | Multi-container management |
+| GitHub         | Version control            |
+| Jenkins        | CI/CD automation           |
+
+---
+
+## Project Structure
 
 ```
 ACEest-Fitness-Gym---Automated-CI-CD-Pipeline
@@ -36,46 +40,56 @@ ACEest-Fitness-Gym---Automated-CI-CD-Pipeline
 ├── fitness_logic.py
 ├── requirements.txt
 ├── Dockerfile
+├── docker-compose.yml
 ├── README.md
 │
 ├── tests
 │   └── test_fitness_logic.py
+│
+├── screenshots
+│   ├── Jenkins Dashboard.png
+│   ├── Jenkins Build Configuration.png
+│   ├── Jenkins Console Output.png
 │
 └── .github
     └── workflows
         └── ci.yml
 ```
 
-# Application Description
+---
 
-The Fitness Gym application provides simple functionality to calculate and evaluate basic fitness metrics.
+## Application Description
+
+The Fitness Gym application calculates basic fitness metrics such as BMI.
 
 ### Main Components
 
-app.py
+**app.py**
 
-Flask application that handles HTTP requests and responses.
+Flask application responsible for handling web requests and responses.
 
-fitness_logic.py
+**fitness_logic.py**
 
-Contains the core fitness calculation logic separated from the main application to maintain modularity.
+Contains the core logic for performing fitness calculations, separated from the main application to maintain modularity.
 
-tests/test_fitness_logic.py
+**tests/test_fitness_logic.py**
 
-Unit tests written using Pytest to verify that the fitness logic works correctly.
+Unit tests written using Pytest to verify that the fitness logic functions correctly.
 
-# Setup Instructions
+---
 
-## 1. Clone the Repository
+## Setup Instructions
+
+### 1. Clone the Repository
 
 ```
 git clone https://github.com/SaravananS-Wilp/ACEest-Fitness-Gym---Automated-CI-CD-Pipeline.git
 cd ACEest-Fitness-Gym---Automated-CI-CD-Pipeline
 ```
 
-## 2. Install Dependencies
+---
 
-Make sure Python and pip are installed.
+### 2. Install Dependencies
 
 ```
 pip install -r requirements.txt
@@ -83,24 +97,23 @@ pip install -r requirements.txt
 
 ---
 
-## 3. Run the Flask Application
+### 3. Run the Application
 
 ```
 python app.py
 ```
 
-The application will run on:
+The application will run at:
 
 ```
 http://localhost:5000
 ```
 
+---
 
-# Running Unit Tests
+## Running Unit Tests
 
-Unit tests are implemented using Pytest.
-
-Run the following command:
+Execute the following command:
 
 ```
 pytest
@@ -114,19 +127,21 @@ Expected output:
 
 This confirms that the application logic is functioning correctly.
 
-# Docker Containerization
+---
 
-The application is containerized using Docker to ensure portability and consistent deployment.
+## Docker Containerization
 
-## Build Docker Image
+Docker ensures that the application runs consistently across different environments.
+
+### Build Docker Image
 
 ```
 docker build -t fitness-app .
 ```
 
-## Run Docker Container
+### Run Docker Container
 
-
+```
 docker run -p 5000:5000 fitness-app
 ```
 
@@ -136,41 +151,9 @@ Now access the application at:
 http://localhost:5000
 ```
 
+---
 
-# Continuous Integration with GitHub Actions
-
-The project uses GitHub Actions to automatically run the CI pipeline whenever code is pushed to the repository.
-
-The workflow file is located at:
-
-```
-.github/workflows/ci.yml
-```
-
-### CI Pipeline Steps
-
-1. Checkout repository code
-2. Install Python dependencies
-3. Run Pytest unit tests
-4. Build Docker image
-5. Run Docker container
-
-If all steps pass successfully, the pipeline shows a green check mark.
-
-# Jenkins Build Integration
-
-Jenkins is used as a build automation tool to pull the project from GitHub and execute the build steps.
-
-## Jenkins Pipeline Steps
-
-1. Pull code from GitHub repository
-2. Install project dependencies
-3. Execute build commands
-4. Validate successful build
-
-Jenkins automatically marks the job as SUCCESS if all steps complete without errors.
-
-# CI/CD Pipeline Workflow
+## CI/CD Pipeline Workflow
 
 The automated workflow follows this sequence:
 
@@ -179,35 +162,58 @@ Developer pushes code
         ↓
 GitHub Repository
         ↓
-GitHub Actions CI Pipeline
+Jenkins CI Pipeline
         ↓
-Run Pytest Tests
+Install Dependencies
+        ↓
+Run Pytest Unit Tests
         ↓
 Build Docker Image
         ↓
-Jenkins Build Execution
-        ↓
-Build Success
+Run Docker Container
 ```
 
 This ensures every code update is automatically tested and validated.
 
-# Learning Outcomes
+---
+
+## Jenkins Pipeline Steps
+
+Jenkins automates the following steps:
+
+1. Pull code from GitHub repository
+2. Install project dependencies
+3. Run automated tests using Pytest
+4. Build Docker image
+5. Deploy and run the container
+
+If all steps execute successfully, Jenkins marks the build as **SUCCESS**.
+
+---
+
+## Screenshots
+
+Refer to the **screenshots** folder for Jenkins pipeline configuration and build execution screenshots.
+
+---
+
+## Learning Outcomes
 
 Through this project, the following DevOps concepts were implemented:
 
-* Source code management with GitHub
+* Source code management using GitHub
 * Automated testing with Pytest
 * Containerization using Docker
-* Continuous Integration using GitHub Actions
-* Build automation using Jenkins
+* Continuous Integration using Jenkins
 * CI/CD pipeline design and implementation
 
-# Future Improvements
+---
+
+## Future Improvements
 
 Possible enhancements include:
 
 * Deploying the container to a cloud platform
 * Adding Kubernetes orchestration
-* Implementing automated deployment
+* Implementing automated production deployment
 * Adding monitoring and logging tools
