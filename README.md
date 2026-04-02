@@ -47,9 +47,17 @@ ACEest-Fitness-Gym---Automated-CI-CD-Pipeline
 │   └── test_fitness_logic.py
 │
 ├── screenshots
-│   ├── Jenkins Dashboard.png
-│   ├── Jenkins Build Configuration.png
-│   ├── Jenkins Console Output.png
+│   ├── App Screenshot
+│       ├── App Home Page.png
+│       ├── BMI - Normal.png
+│       ├── BMI - Overweight.png
+│       ├── Validation 1 - Weight Negative Value.png
+│       ├── Validation 2 - Height Zero Value.png
+│   ├── Jenkins Screenshot
+│       ├── Jenkins Dashboard.png
+│       ├── Jenkins Build Configuration.png
+│       ├── Jenkins Console Output.png
+│
 │
 └── .github
     └── workflows
@@ -75,6 +83,23 @@ Contains the core logic for performing fitness calculations, separated from the 
 **tests/test_fitness_logic.py**
 
 Unit tests written using Pytest to verify that the fitness logic functions correctly.
+
+---
+
+## User Interface (UI)
+
+A simple web-based user interface has been implemented using Flask templates.
+
+### Features:
+- Input fields for weight (kg) and height (m)
+- BMI calculation on form submission
+- Displays calculated BMI result dynamically
+
+### How it works:
+- User enters weight and height
+- Form sends POST request to Flask backend
+- Backend calculates BMI using `fitness_logic.py`
+- Result is displayed on the same page
 
 ---
 
@@ -122,13 +147,32 @@ pytest
 Expected output:
 
 ```
-3 passed
+9 passed
 ```
 
 This confirms that the application logic is functioning correctly.
 
 ---
+## Test Coverage
 
+The project includes a comprehensive Pytest test suite to validate core logic.
+
+#### Test Cases Covered:
+- Valid BMI calculation
+- Multiple input combinations using parameterized tests
+- Zero height (error handling)
+- Negative weight and height (validation checks)
+- Edge cases for input validation
+
+#### Example Test Cases:
+```python
+@pytest.mark.parametrize("weight,height,expected", [
+    (60, 1.70, 20.76),
+    (80, 1.80, 24.69),
+    (90, 1.60, 35.16),
+])
+```
+---
 ## Docker Containerization
 
 Docker ensures that the application runs consistently across different environments.
@@ -193,7 +237,7 @@ If all steps execute successfully, Jenkins marks the build as **SUCCESS**.
 
 ## Screenshots
 
-Refer to the [Screenshots](screenshots/) folder for Jenkins pipeline configuration, build execution screenshots and Application UI screen.
+Refer to the [Screenshots](screenshots/) folder for Jenkins pipeline configuration, build execution screenshots and application UI screen.
 
 ---
 
