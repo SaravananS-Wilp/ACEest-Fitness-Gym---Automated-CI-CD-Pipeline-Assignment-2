@@ -44,16 +44,19 @@ ACEest-Fitness-Gym---Automated-CI-CD-Pipeline
 ├── README.md
 │
 ├── tests
-│   └── test_fitness_logic.py
+│   ├── test_fitness_logic.py
+|
+├── templates
+│   ├── index.html
 │
 ├── screenshots
-│   ├── App Screenshot
+│   └── App Screenshot
 │       ├── App Home Page.png
 │       ├── BMI - Normal.png
 │       ├── BMI - Overweight.png
 │       ├── Validation 1 - Weight Negative Value.png
 │       ├── Validation 2 - Height Zero Value.png
-│   ├── Jenkins Screenshot
+│   └── Jenkins Screenshot
 │       ├── Jenkins Dashboard.png
 │       ├── Jenkins Build Configuration.png
 │       ├── Jenkins Console Output.png
