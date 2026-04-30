@@ -1,22 +1,27 @@
-version: "3"
+version: '3.9'
 
 services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins-devops
-    user: root
+  app:
+    build: .
     ports:
-      - "8080:8080"
-      - "50000:50000"
+      - '5000:5000'
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: >
-      bash -c "
-      apt update &&
-      apt install -y python3 python3-pip docker.io &&
-      /usr/local/bin/jenkins.sh
-      "
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+    command: gunicorn --bind 0.0.0.0:5000 ACEest_Fitness:app
+
+  sonar:
+    image: sonarsource/sonarqube-community:10.1-community
+    ports:
+      - '9000:9000'
+    environment:
+      - SONAR_JDBC_USERNAME=sonar
+      - SONAR_JDBC_PASSWORD=sonar
+    volumes:
+      - sonar_data:/opt/sonarqube/data
+      - sonar_extensions:/opt/sonarqube/extensions
 
 volumes:
-  jenkins_home:
+  sonar_data:
+  sonar_extensions:

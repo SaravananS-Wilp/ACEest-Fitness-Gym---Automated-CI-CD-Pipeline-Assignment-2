@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aceest-fitness-v1
+  labels:
+    app: aceest-fitness
+    variant: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aceest-fitness
+      variant: v1
+  template:
+    metadata:
+      labels:
+        app: aceest-fitness
+        variant: v1
+    spec:
+      containers:
+        - name: aceest-fitness-v1
+          image: docker.io/your-dockerhub-username/aceest-fitness:v1
+          ports:
+            - containerPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aceest-fitness-v2
+  labels:
+    app: aceest-fitness
+    variant: v2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aceest-fitness
+      variant: v2
+  template:
+    metadata:
+      labels:
+        app: aceest-fitness
+        variant: v2
+    spec:
+      containers:
+        - name: aceest-fitness-v2
+          image: docker.io/your-dockerhub-username/aceest-fitness:v2
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aceest-fitness-ab-service
+spec:
+  selector:
+    app: aceest-fitness
+  ports:
+    - port: 80
+      targetPort: 5000
