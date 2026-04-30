@@ -255,6 +255,19 @@ Through this project, the following DevOps concepts were implemented:
 * CI/CD pipeline design and implementation
 
 ---
+## Versioning Strategy
+
+The project follows version-based development from v1.0 to v3.2.4.
+
+Tags have been used in GitHub to represent each version milestone:
+- v1.0 – Initial BMI calculation
+- v2.0 – Validation added
+- v3.0 – Modularization
+- v3.1 – Testing added
+- v3.2 – UI integration
+- v3.2.4 – Final stable version
+
+---
 
 ## Future Improvements
 
