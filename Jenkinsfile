@@ -3,18 +3,15 @@ pipeline {
 
     stages {
 
-        stage('Install Dependencies') {
+        stage('Run Tests in Docker') {
             steps {
-                sh 'python3 --version'
-                sh 'python3 -m pip install --upgrade pip'
-                sh 'python3 -m pip install -r requirements.txt'
-                sh 'python3 -m pip install pytest'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh 'python3 -m pytest'
+                sh '''
+                docker run --rm \
+                -v $(pwd):/app \
+                -w /app \
+                python:3.10 \
+                sh -c "pip install -r requirements.txt && pip install pytest && pytest"
+                '''
             }
         }
 
