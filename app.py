@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template
-from fitness_logic import calculate_bmi, membership_status, calculate_bmi_value
+from fitness_logic import calculate_bmi,calculate_bmi_value
 
 app = Flask(__name__)
 
@@ -7,20 +7,29 @@ app = Flask(__name__)
 def home():
     bmi = None
     category = None
+    error = None
 
     if request.method == "POST":
-        weight = float(request.form["weight"])
-        height = float(request.form["height"])
-
         try:
-            bmi_value = calculate_bmi_value(weight, height)
-            bmi = round(bmi_value, 2)
-            category = calculate_bmi(weight,height)
+            if "weight" in request.form:
+                weight = float(request.form["weight"])
+                height = float(request.form["height"])
+
+                bmi_value = calculate_bmi_value(weight, height)
+                bmi = round(bmi_value, 2)
+                category = calculate_bmi(weight, height)
+
         except ValueError as e:
-            bmi = str(e)
+            error = str(e)
+        except Exception:
+            error = "Invalid input"
 
-    return render_template("index.html", bmi=bmi, category=category)
-
+    return render_template(
+        "index.html",
+        bmi=bmi,
+        category=category,
+        error=error,
+    )
 
 @app.route("/bmi")
 def bmi():
@@ -33,18 +42,6 @@ def bmi():
         "weight": weight,
         "height": height,
         "category": result
-    })
-
-
-@app.route("/membership")
-def membership():
-    end_date = request.args.get("end")
-
-    status = membership_status(end_date)
-
-    return jsonify({
-        "membership_end": end_date,
-        "status": status
     })
 
 
