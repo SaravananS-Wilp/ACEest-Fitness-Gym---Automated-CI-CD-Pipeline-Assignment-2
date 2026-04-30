@@ -39,12 +39,13 @@
     </form>
 
     {% if bmi %}
-        <h3>BMI: {{ bmi }}</h3>
-    {% endif %}
+    <h3>Your BMI: {{ bmi }}</h3>
+    <h3>Category: {{ category }}</h3>
+   {% endif %}
 
-    {% if category %}
-        <h3>Category: {{ category }}</h3>
-    {% endif %}
+{% if error %}
+    <h3 style="color:red;">Error: {{ error }}</h3>
+{% endif %}
 
 </body>
 </html>
