@@ -1,4 +1,4 @@
-# ACEest Fitness & Gym DevOps Pipeline
+# ACEest Fitness Gym – Automated CI/CD Pipeline
 
 ## 1. Introduction
 
